@@ -1,0 +1,114 @@
+package ruanjian;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class size {
+     public static int range;
+     public static int num;
+     public static int fu;
+     public static int mul;
+     //新增查重功能
+     public static boolean check(int []numbers1,int[] numbers2,int a,int b){
+         boolean bool=false;
+         for (int i=0;i<numbers1.length;i++){
+              if (a==numbers1[i] && b==numbers2[i])
+            	  break;
+              else bool=true;
+         }
+        return bool;
+     }
+     //数值随机产生负数
+     public static int fushu(int a){
+       if (fu==2){
+               int b=(int)(Math.random()>0.5?1:0);
+               if (b==0)
+               {
+                 a = 0-a;
+               }
+         }
+         return (a);    
+     }
+     //随机生成操作数和运算符
+     public static void A1 ()throws IOException{
+         int k=0,j=0,add=0,sum=0,a,b,a1=0;
+         if (fu==2) 
+        	 a1 = 0-range;
+         int[] n1 = new int[num+5];
+         int[] n2 = new int[num+5];
+         while (k<num){
+                a=fushu((int)(1+Math.random()*range));
+                b=fushu((int)(1+Math.random()*range));
+                j=0;
+                while (j<2){
+                   if (mul==1){
+                     add = (int)(Math.random()*2);
+                       }
+                   else{
+                     add = (int)(Math.random()*4);
+                 }
+                 j++;
+               }
+          sum = 0;
+          switch (add){
+             case 0:
+                sum=a+b;
+                 if (sum<=range&&check(n1,n2,a,b)&&sum!=0){
+                        n1[k]=a;
+                        n2[k]=b;
+                        k++;
+                        System.out.println(a+"+"+b+"=");
+                 }
+                 else 
+                	 break; 
+              case 1:
+                 sum=a-b;
+                 if (sum>a1&&sum<=range&&check(n1,n2,a,b)&&sum!=0){
+                        n1[k]=a;
+                        n2[k]=b;
+                        k++;
+                        System.out.println(a+"-"+b+"=");
+                 } 
+                 else
+                	 break;
+              case 2:
+                 sum=a*b;
+                 if (sum>a1&&sum<=range&&sum<=100&&check(n1,n2,a,b)&&sum!=0){
+                        n1[k]=a;
+                        n2[k]=b;
+                        k++;
+                        System.out.println(a+"-"+b+"=");
+                    }
+                 else 
+                	 break;
+              case 3:
+            	 sum=a/b;
+                 if (sum>a1&&sum<=range&&check(n1,n2,a,b)&&sum!=0){
+                        n1[k]=a;
+                        n2[k]=b;
+                        k++;
+                        System.out.println(a+"/"+b+"=");
+                    }
+                 else 
+                	 break;
+            }
+         }
+     } 
+     public static void  main(String[] args) throws IOException{
+         Scanner reader = new Scanner(System.in);
+         System.out.println("请输入数值范围：");
+         range = reader.nextInt();
+         
+         System.out.println("请确定是否包含有乘除法：1.否 2.是：");
+         mul = reader.nextInt();
+         
+         System.out.println("请确定是否包含有负数：1.否2.是：");
+         fu = reader.nextInt();
+         
+         System.out.println("请输入出题的数量：");
+         num = reader.nextInt(); 
+        
+         if ((fu==0||fu==1)&&(mul==0||mul==1)&&range>0&&num>0){
+        	    A1 ();
+            }
+    } 
+}
